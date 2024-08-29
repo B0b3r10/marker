@@ -8,7 +8,6 @@ import argparse
 from marker.convert import convert_single_pdf
 from marker.logger import configure_logging
 from marker.models import load_all_models
-
 from marker.output import save_markdown
 
 configure_logging()
@@ -30,7 +29,9 @@ def main():
     fname = args.filename
     model_lst = load_all_models()
     start = time.time()
-    full_text, images, out_meta = convert_single_pdf(fname, model_lst, max_pages=args.max_pages, langs=langs, batch_multiplier=args.batch_multiplier, start_page=args.start_page)
+    full_text, images, out_meta = convert_single_pdf(fname, model_lst, max_pages=args.max_pages, 
+                                                     langs=langs, batch_multiplier=args.batch_multiplier, 
+                                                     start_page=args.start_page)
 
     fname = os.path.basename(fname)
     subfolder_path = save_markdown(args.output, fname, full_text, images, out_meta)

@@ -104,7 +104,6 @@ def main():
 
     total_processes = min(len(files_to_convert), args.workers)
 
-    # Dynamically set GPU allocation per task based on GPU ram
     if settings.CUDA:
         tasks_per_gpu = settings.INFERENCE_RAM // settings.VRAM_PER_TASK if settings.CUDA else 0
         total_processes = int(min(tasks_per_gpu, total_processes))
@@ -112,7 +111,7 @@ def main():
         total_processes = int(total_processes)
 
     try:
-        mp.set_start_method('spawn') # Required for CUDA, forkserver doesn't work
+        mp.set_start_method('spawn')
     except RuntimeError:
         raise RuntimeError("Set start method to spawn twice. This may be a temporary issue with the script. Please try running it again.")
 
@@ -135,8 +134,6 @@ def main():
         list(tqdm(pool.imap(process_single_pdf, task_args), total=len(task_args), desc="Processing PDFs", unit="pdf"))
 
         pool._worker_handler.terminate = worker_exit
-
-    # Delete all CUDA tensors
     del model_lst
 
 

@@ -29,7 +29,6 @@ from marker.postprocessors.markdown import merge_spans, merge_lines, get_full_te
 from marker.cleaners.text import cleanup_text
 from marker.images.extract import extract_images
 from marker.images.save import images_to_dict
-
 from typing import List, Dict, Tuple, Optional
 from marker.settings import settings
 

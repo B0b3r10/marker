@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # General
     TORCH_DEVICE: Optional[str] = None # Note: MPS device does not work for text detection, and will default to CPU
     IMAGE_DPI: int = 96 # DPI to render images pulled from pdf at
-    EXTRACT_IMAGES: bool = True # Extract images from pdfs and save them
+    EXTRACT_IMAGES: bool = False # Extract images from pdfs and save them
     PAGINATE_OUTPUT: bool = False # Paginate output markdown
 
     @computed_field
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
 
     INFERENCE_RAM: int = 40 # How much VRAM each GPU has (in GB).
     VRAM_PER_TASK: float = 4.5 # How much VRAM to allocate per task (in GB).  Peak marker VRAM usage is around 5GB, but avg across workers is lower.
-    DEFAULT_LANG: str = "English" # Default language we assume files to be in, should be one of the keys in TESSERACT_LANGUAGES
+    DEFAULT_LANG: str = "Russian" # Default language we assume files to be in, should be one of the keys in TESSERACT_LANGUAGES
 
     SUPPORTED_FILETYPES: Dict = {
         "application/pdf": "pdf",
@@ -47,7 +47,6 @@ class Settings(BaseSettings):
     INVALID_CHARS: List[str] = [chr(0xfffd), "�"]
     OCR_ENGINE: Optional[Literal["surya", "ocrmypdf"]] = "surya" # Which OCR engine to use, either "surya" or "ocrmypdf".  Defaults to "ocrmypdf" on CPU, "surya" on GPU.
     OCR_ALL_PAGES: bool = False # Run OCR on every page even if text can be extracted
-
     ## Surya
     SURYA_OCR_DPI: int = 96
     RECOGNITION_BATCH_SIZE: Optional[int] = None # Batch size for surya OCR defaults to 64 for cuda, 32 otherwise
@@ -59,7 +58,7 @@ class Settings(BaseSettings):
 
     # Texify model
     TEXIFY_MODEL_MAX: int = 384 # Max inference length for texify
-    TEXIFY_TOKEN_BUFFER: int = 256 # Number of tokens to buffer above max for texify
+    TEXIFY_TOKEN_BUFFER: int = 512 # Number of tokens to buffer above max for texify
     TEXIFY_DPI: int = 96 # DPI to render images at
     TEXIFY_BATCH_SIZE: Optional[int] = None # Defaults to 6 for cuda, 12 otherwise
     TEXIFY_MODEL_NAME: str = "vikp/texify"
@@ -86,7 +85,7 @@ class Settings(BaseSettings):
     # Debug
     DEBUG: bool = False # Enable debug logging
     DEBUG_DATA_FOLDER: Optional[str] = None
-    DEBUG_LEVEL: int = 0 # 0 to 2, 2 means log everything
+    DEBUG_LEVEL: int = 1 # 0 to 2, 2 means log everything
 
     @computed_field
     @property
