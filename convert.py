@@ -104,15 +104,6 @@ def main():
 
     total_processes = min(len(files_to_convert), args.workers)
 
-<<<<<<< HEAD
-    if settings.CUDA:
-        tasks_per_gpu = settings.INFERENCE_RAM // settings.VRAM_PER_TASK if settings.CUDA else 0
-        total_processes = int(min(tasks_per_gpu, total_processes))
-    else:
-        total_processes = int(total_processes)
-
-=======
->>>>>>> 97ce0512655c48ec383d25a6c886cacf79e0ac35
     try:
         mp.set_start_method('spawn')
     except RuntimeError:
