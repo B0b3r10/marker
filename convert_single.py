@@ -19,9 +19,10 @@ def main():
     parser.add_argument("output", help="Output base folder path")
     parser.add_argument("--max_pages", type=int, default=None, help="Maximum number of pages to parse")
     parser.add_argument("--start_page", type=int, default=None, help="Page to start processing at")
-    parser.add_argument("--langs", type=str, help="Languages to use for OCR, comma separated", default=None)
+    parser.add_argument("--langs", type=str, help="Optional languages to use for OCR, comma separated", default=None)
     parser.add_argument("--batch_multiplier", type=int, default=2, help="How much to increase batch sizes")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging", default=False)
+    parser.add_argument("--ocr_all_pages", action="store_true", help="Force OCR on all pages", default=False)
     args = parser.parse_args()
 
     langs = args.langs.split(",") if args.langs else None
@@ -29,9 +30,13 @@ def main():
     fname = args.filename
     model_lst = load_all_models()
     start = time.time()
+<<<<<<< HEAD
     full_text, images, out_meta = convert_single_pdf(fname, model_lst, max_pages=args.max_pages, 
                                                      langs=langs, batch_multiplier=args.batch_multiplier, 
                                                      start_page=args.start_page)
+=======
+    full_text, images, out_meta = convert_single_pdf(fname, model_lst, max_pages=args.max_pages, langs=langs, batch_multiplier=args.batch_multiplier, start_page=args.start_page, ocr_all_pages=args.ocr_all_pages)
+>>>>>>> 97ce0512655c48ec383d25a6c886cacf79e0ac35
 
     fname = os.path.basename(fname)
     subfolder_path = save_markdown(args.output, fname, full_text, images, out_meta)
