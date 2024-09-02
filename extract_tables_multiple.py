@@ -14,7 +14,9 @@ for root, dirs, files in os.walk(main_directory):
             extracted_lines = []
 
             for line in lines:
-                if re.search(r'\b КОМПАНИЯ\b', line) and (re.search(r'\b ТИКЕР\b', line) or re.search(r'\b2023П\b', line) or re.search(r'\bEV/REVENUE\b', line)):
+                if re.search(r'\b КОМПАНИЯ\b', line) and (re.search(r'\b ТИКЕР\b', line) or re.search(r'\b2023П\b', line) 
+                                                          or re.search(r'\bEV/REVENUE\b', line) or re.search(r'\bRX\b', line) 
+                                                          or re.search(r'\bRX\b', line)):
                     start_capture = True
                 if start_capture:
                     extracted_lines.append(line)

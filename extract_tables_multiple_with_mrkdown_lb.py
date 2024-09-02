@@ -1,17 +1,17 @@
 import os
 
 # Путь к директории с .md файлами
-main_directory = 'data/240/'
-
-# Создаем директорию для сохранения таблиц, если она не существует
-output_directory = 'extracted_tables/'
-os.makedirs(output_directory, exist_ok=True)
+main_directory = 'data/GPB/'
 
 # Проходим по всем файлам в main_directory
 for root, dirs, files in os.walk(main_directory):
     for file in files:
         if file.endswith('.md'):
             input_file_path = os.path.join(root, file)
+            
+            # Создаем директорию для сохранения таблиц, если она не существует
+            output_directory = f"{root}_table/"
+            os.makedirs(output_directory, exist_ok=True)
             
             # Читаем содержимое файла
             with open(input_file_path, 'r', encoding='utf-8') as f:
